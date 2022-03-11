@@ -39,10 +39,14 @@ var civicCookieControlConfig = {
             description: 'We like to use analytics cookies so we can understand how you use the service and make improvements.',
             cookies: ['_ga', '_gid', '_gat_UA-15841534-7', '_gat_UA-15841534-6', '_gat_gtag_UA_15841534_5', '_gat_UA-15841534-11'],
             onAccept: function () {
-                dataLayer.push({ 'event': 'analytics_consent_accepted' });
+                if (typeof dataLayer !== 'undefined') {
+                    dataLayer.push({ 'event': 'analytics_consent_accepted' });
+                }
             },
             onRevoke: function () {
-                dataLayer.push({ 'event': 'analytics_consent_withdrawn' });
+                if (typeof dataLayer !== 'undefined') {
+                    dataLayer.push({ 'event': 'analytics_consent_withdrawn' });
+                }
 
                 // Disable Google Analytics from sending data
                 window['ga-disable-UA-15841534-7'] = true;
